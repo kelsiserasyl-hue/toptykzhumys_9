@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Механикадағы күштер — виртуалды зертхана</title>
+<style>
+:root{--bg:#070d24;--c:#38e1ff;--v:#8b5cff;--b:#3a6bff;--t:#e9f2ff;--m:#9db3dd;--ok:#34e0a1;--er:#ff6b8a;--ln:#2d4290}
+*{box-sizing:border-box}
+body{margin:0;font:16px/1.5 "Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;color:var(--t);min-height:100vh;
+background:radial-gradient(1100px 600px at 85% -10%,#3a1f8f66,transparent),radial-gradient(900px 500px at -10% 25%,#0f55a066,transparent),var(--bg)}
+header{position:sticky;top:0;z-index:5;display:flex;gap:6px;overflow-x:auto;padding:8px 12px;background:#070d24ee;border-bottom:1px solid var(--ln)}
+header button{flex:none;border:1px solid var(--ln);background:#101c4d;color:var(--t);border-radius:999px;padding:7px 14px;font:inherit;font-size:14px;cursor:pointer}
+header button.on{background:linear-gradient(90deg,var(--b),var(--v));border-color:transparent}
+header i{font-style:normal;color:var(--ok);margin-left:4px}
+main{max-width:1100px;margin:0 auto;padding:16px}
+.sec{display:none}.sec.on{display:block}
+h1{font-size:clamp(28px,6vw,54px);line-height:1.1;margin:30px 0 8px;text-align:center;letter-spacing:1px;background:linear-gradient(90deg,var(--c),#7aa2ff 50%,var(--v));-webkit-background-clip:text;background-clip:text;color:transparent}
+h2{margin:6px 0 14px;font-size:clamp(20px,4vw,28px)}h3{margin:14px 0 6px;color:var(--c);font-size:17px}
+.sub{text-align:center;color:var(--m);margin:0 0 28px}
+.st{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:22px;perspective:900px;margin-bottom:28px}
+.sc{transform-style:preserve-3d;transition:transform .15s;text-align:left;color:var(--t);font:inherit;cursor:pointer;border:1px solid var(--ln);border-radius:20px;padding:20px;background:linear-gradient(155deg,#1a2c78,#0c1544);box-shadow:0 18px 40px #0009,inset 0 1px #ffffff22}
+.sc svg{width:100%;height:120px;transform:translateZ(40px)}.sc b{display:block;font-size:19px;margin-top:8px;transform:translateZ(30px)}.sc span{color:var(--m);font-size:14px}
+.go{display:block;margin:0 auto;font-size:19px;padding:14px 38px}
+.card{background:linear-gradient(160deg,#14235a,#0d1740);border:1px solid var(--ln);border-radius:16px;padding:16px;margin-bottom:16px;box-shadow:0 10px 30px #0008}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
+@media(max-width:800px){.grid{grid-template-columns:1fr}}
+svg{display:block;width:100%;height:auto;max-height:470px}
+svg text{font-family:"Segoe UI",Roboto,Arial,sans-serif}
+.btn{border:0;border-radius:12px;padding:10px 18px;font:inherit;font-weight:600;color:#fff;cursor:pointer;background:linear-gradient(90deg,var(--b),var(--v));box-shadow:0 6px 18px #3a6bff55}
+.btn.s{background:#1b2a6b;box-shadow:none;border:1px solid var(--ln)}
+.btn:hover{filter:brightness(1.15)}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--c);outline-offset:2px}
+.bar{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0;align-items:center}
+.th{background:#0a1236;border-left:4px solid var(--v);border-radius:8px;padding:10px 12px;font-size:15px;color:#cfe0ff}
+.ro{margin-top:10px;background:#081030;border:1px solid var(--ln);border-radius:10px;padding:10px;font-size:15px}
+ol{padding-left:20px;margin:6px 0}li{margin:3px 0;font-size:15px}
+label{display:block;margin:8px 0}input[type=range]{width:100%;accent-color:var(--c)}
+.chip{display:inline-block;margin:0 10px 0 0}
+.tw{overflow-x:auto}table{width:100%;border-collapse:collapse;min-width:440px}
+th,td{padding:6px;border-bottom:1px solid var(--ln);text-align:center;font-size:15px}th{color:var(--m);font-weight:600}
+table input,select,textarea{background:#081030;color:var(--t);border:1px solid var(--ln);border-radius:8px;padding:6px 8px;font:inherit}
+table input{width:90px}table input.w{width:150px}
+select{width:100%;margin-top:4px}textarea{width:100%;min-height:70px;margin-top:4px}
+.fb{margin-top:10px}.fb .sc3{font-size:28px;font-weight:700;color:var(--c)}.fb ul{margin:6px 0;padding-left:20px;color:#ffd3dc}.fb .g{color:var(--ok)}
+.x{background:none;border:0;color:var(--er);cursor:pointer;font-size:18px}
+.bd{height:14px;border-radius:9px;background:#081030;border:1px solid var(--ln);overflow:hidden}.bd div{height:100%;background:linear-gradient(90deg,var(--c),var(--v));transition:width .4s}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header id="nav"></header>
+<main>
+<section class="sec on" id="home">
+<h1>МЕХАНИКАДАҒЫ КҮШТЕР</h1>
+<p class="sub">9-сынып · Физика · Интерактивті виртуалды зертхана</p>
+<div class="st">
+<button class="sc" onclick="go(1)"><svg viewBox="0 0 160 120"><rect x="74" y="4" width="12" height="30" rx="5" fill="#38e1ff"/><polygon points="60,50 100,50 108,40 68,40" fill="#a9bcff"/><rect x="60" y="50" width="40" height="38" fill="#6d8bff"/><polygon points="100,50 108,40 108,78 100,88" fill="#3f58c9"/><line x1="130" y1="40" x2="130" y2="108" stroke="#8b5cff" stroke-width="4"/><polygon points="130,116 122,102 138,102" fill="#8b5cff"/></svg><b>Ауырлық күшін зерттеу</b><span>Fау = mg</span></button>
+<button class="sc" onclick="go(2)"><svg viewBox="0 0 160 120"><rect x="50" y="4" width="60" height="8" rx="3" fill="#6d8bff"/><polyline points="80,12 80,20 62,26 98,36 62,46 98,56 62,66 98,76 80,82 80,90" fill="none" stroke="#38e1ff" stroke-width="4" stroke-linejoin="round"/><rect x="66" y="90" width="28" height="24" rx="3" fill="#8b5cff"/></svg><b>Серпімділік күшін зерттеу</b><span>Fсерп = kΔl</span></button>
+<button class="sc" onclick="go(3)"><svg viewBox="0 0 160 120"><rect x="10" y="88" width="140" height="22" fill="#8a5a2b"/><polygon points="40,50 100,50 110,40 50,40" fill="#b79cff"/><rect x="40" y="50" width="60" height="38" fill="#8b5cff"/><polygon points="100,50 110,40 110,78 100,88" fill="#5b36c4"/><line x1="112" y1="64" x2="148" y2="64" stroke="#38e1ff" stroke-width="4"/><polygon points="156,64 144,57 144,71" fill="#38e1ff"/></svg><b>Үйкеліс күшін зерттеу</b><span>Fүйк = μN</span></button>
+</div>
+<button class="btn go" onclick="go(1)">Зерттеуді бастау</button>
+</section>
+<div id="labs"></div>
+<section class="sec" id="fin">
+<h2>Қорытынды жасау</h2>
+<div class="card">
+<label>Аты-жөніңіз<input id="nm" style="width:100%;margin-top:4px;background:#081030;color:#e9f2ff;border:1px solid #2d4290;border-radius:8px;padding:8px;font:inherit"></label>
+<label>1. Ауырлық күші қандай шамаларға тәуелді?<textarea data-a="0"></textarea></label>
+<label>2. Серпімділік күші мен серіппенің ұзаруы арасында қандай байланыс бар?<textarea data-a="1"></textarea></label>
+<label>3. Үйкеліс күшіне қандай факторлар әсер етеді?<textarea data-a="2"></textarea></label>
+<label>4. Үш күштің табиғаты мен бағыттарының айырмашылығы қандай?<textarea data-a="3"></textarea></label>
+<div class="bar"><button class="btn" onclick="sum()">Нәтижені тексеру</button><button class="btn s" onclick="save()">Қорытындыны сақтау</button></div>
+<div class="fb" id="fsum"></div>
+</div>
+</section>
+</main>
+<script>
+const $=s=>document.querySelector(s);
+const f=n=>String(+(+n).toPrecision(3)).replace('.',',');
+const num=v=>parseFloat(String(v).replace(',','.'));
+const MU={'Ағаш':.3,'Металл':.15,'Кедір-бұдыр':.5},G=9.8;
+const D={g:9.8,m1:.5,k:100,m2:.5,sf:'Ағаш',N:20,bx:30,dir:0};
+const S=Object.assign({rows:{1:[],2:[],3:[]},sel:{},score:{}},D);
+const Q={
+1:[{t:'Масса артқанда ауырлық күші қалай өзгереді?',o:['Кемиді','Артады, массаға тура пропорционал','Өзгермейді'],c:1,h:'кестедегі F/m қатынасын есептеңіз: ол өзгере ме, әлде тұрақты ма?'}],
+2:[{t:'Серпімділік күші мен ұзару арасындағы байланыс қандай?',o:['Тәуелді емес','Кері пропорционал','Тура пропорционал: F = kΔl'],c:2,h:'ұзару 2 есе артқанда күш қалай өзгергенін және F/Δl қатынасын қараңыз.'}],
+3:[{t:'Нормаль реакция күші артқанда үйкеліс күші қалай өзгереді?',o:['Артады','Кемиді','Өзгермейді'],c:0,h:'бір бетте N-ді өзгертіп, F/N қатынасын салыстырыңыз.'},
+{t:'N бірдей болғанда үйкеліс күші ең көп бет қайсы?',o:['Ағаш','Металл','Кедір-бұдыр'],c:2,h:'беттердің μ коэффициенттерін салыстырыңыз.'}]};
+const TH={
+1:'<b>Ауырлық күші</b> — Жердің денені өзіне тартуынан пайда болатын күш. Формуласы: <b>Fау = mg</b>, g ≈ 9,8 Н/кг. Бағыты: тік төмен, Жер центріне қарай.',
+2:'<b>Гук заңы:</b> <b>Fсерп = kΔl</b>. Серпімділік күші деформацияға қарама-қарсы бағытталады: серіппе төмен созылса, күш жоғары бағытталады. Тыныштықта kΔl = mg.',
+3:'<b>Үйкеліс күші:</b> <b>Fүйк = μN</b>. Қозғалысқа қарсы, жанасу бетімен бағытталады. Бірқалыпты қозғалғанда тарту күшінің модулі үйкеліс күшінің модуліне тең.'};
+const TK={
+1:['Жүктің массасын 0,5 кг етіп орнатыңыз.','Динамометр көрсеткішін бақылаңыз.','Массаны 1 кг, 2 кг және 3 кг етіп өзгертіңіз.','Әр жағдайдағы ауырлық күшін кестеге жазыңыз.','Масса артқанда ауырлық күші қалай өзгеретінін анықтаңыз.'],
+2:['Серіппенің қатаңдығын 100 Н/м етіп орнатыңыз.','Серіппеге жүкті іліңіз.','Серіппенің ұзаруын бақылаңыз.','Жүктің массасын біртіндеп арттырыңыз.','Қатаңдықты өзгертіп, созылуды салыстырыңыз.','Серпімділік күші мен ұзару арасындағы байланысты анықтаңыз.'],
+3:['Білеушені ағаш бетке орналастырыңыз.','Динамометрмен бірқалыпты сүйреңіз.','Көрсеткішті жазып алыңыз.','Бетті металл және кедір-бұдыр беттерге ауыстырыңыз.','Үйкеліс күшінің мәндерін салыстырыңыз.','Нормаль реакция күшін өзгертіп, өзгерісін бақылаңыз.','Қай бетте үйкеліс күші көп екенін анықтаңыз.']};
+const GOAL={1:'дененің массасы мен ауырлық күшінің арасындағы байланысты анықтау.',2:'серіппенің ұзаруы мен серпімділік күшінің арасындағы байланысты зерттеу.',3:'үйкеліс күшінің бет түріне және нормаль реакция күшіне тәуелділігін зерттеу.'};
+const TI={1:'1-зертхана. Ауырлық күшін зерттеу',2:'2-зертхана. Серпімділік күшін зерттеу',3:'3-зертхана. Үйкеліс күшін зерттеу'};
+const CT={
+1:'<label>Масса: <b id="v1m"></b> кг<input type="range" id="m1" min="0.1" max="5" step="0.1" value="0.5" oninput="S.m1=+this.value;u1()"></label><div>g: <label class="chip" style="display:inline-block"><input type="radio" name="g" value="9.8" checked onchange="S.g=9.8;u1()"> 9,8 Н/кг</label><label class="chip" style="display:inline-block"><input type="radio" name="g" value="10" onchange="S.g=10;u1()"> 10 Н/кг</label></div>',
+2:'<label>Серіппенің қатаңдығы k: <b id="v2k"></b> Н/м<input type="range" id="k2" min="50" max="300" step="10" value="100" oninput="S.k=+this.value;u2()"></label><label>Жүктің массасы: <b id="v2m"></b> кг<input type="range" id="m2" min="0.1" max="2" step="0.1" value="0.5" oninput="S.m2=+this.value;u2()"></label>',
+3:'<div class="bar" id="sfb">'+Object.keys(MU).map(s=>`<button class="btn s" data-sf="${s}" onclick="S.sf='${s}';u3()">${s}</button>`).join('')+'</div><label>Нормаль реакция күші N: <b id="v3n"></b> Н<input type="range" id="n3" min="5" max="100" step="5" value="20" oninput="S.N=+this.value;u3()"></label><div class="bar"><button class="btn" onclick="mv(1)">Оңға сүйреу</button><button class="btn" onclick="mv(-1)">Солға сүйреу</button><button class="btn s" onclick="mv(0)">Тоқтату</button></div>'};
+const VB={1:'0 0 360 430',2:'0 0 360 430',3:'0 0 460 280'};
+const tail=n=>`<div class="card"><h3>Өлшеу кестесі</h3><div class="tw"><table id="t${n}"></table></div><div class="bar"><button class="btn" onclick="add(${n})">Кестеге жазу</button><button class="btn s" onclick="clr(${n})">Кестені тазалау</button><button class="btn s" onclick="rst(${n})">Бастапқы күйге қайтару</button></div><h3>Қорытынды</h3>${Q[n].map((q,i)=>`<label>${q.t}<select data-s="${n}_${i}"><option value="">— таңдаңыз —</option>${q.o.map((o,j)=>`<option value="${j}">${o}</option>`).join('')}</select></label>`).join('')}<div class="bar"><button class="btn" onclick="chk(${n})">Нәтижені тексеру</button></div><div class="fb" id="fb${n}"></div></div>`;
+$('#labs').innerHTML=[1,2,3].map(n=>`<section class="sec" id="lab${n}"><h2>${TI[n]}</h2><div class="grid"><div class="card"><svg id="s${n}" viewBox="${VB[n]}"></svg><div class="ro" id="r${n}"></div></div><div class="card"><p><b>Тәжірибенің мақсаты:</b> ${GOAL[n]}</p><div class="th">${TH[n]}</div><h3>Басқару</h3>${CT[n]}<h3>Тапсырма</h3><ol>${TK[n].map(t=>`<li>${t}</li>`).join('')}</ol></div></div>${tail(n)}</section>`).join('');
+/* навигация */
+const VIEWS=[['home','Басты бет'],['1','1 · Ауырлық'],['2','2 · Серпімділік'],['3','3 · Үйкеліс'],['fin','Қорытынды']];
+$('#nav').innerHTML=VIEWS.map(([v,l])=>`<button data-v="${v}" onclick="go('${v}')">${l}${'123'.includes(v)&&v!=='home'&&v!=='fin'?`<i id="b${v}"></i>`:''}</button>`).join('');
+function go(v){v=String(v);document.querySelectorAll('.sec').forEach(s=>s.classList.remove('on'));$(v==='home'||v==='fin'?'#'+v:'#lab'+v).classList.add('on');document.querySelectorAll('#nav button').forEach(b=>b.classList.toggle('on',b.dataset.v===v));scrollTo(0,0)}
+/* көмекші сызу */
+const arr=(x1,y1,x2,y2,c)=>{const a=Math.atan2(y2-y1,x2-x1),p=d=>`${x2-11*Math.cos(a+d)},${y2-11*Math.sin(a+d)}`;return `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${c}" stroke-width="3.5" stroke-linecap="round"/><polygon points="${x2},${y2} ${p(.45)} ${p(-.45)}" fill="${c}"/>`};
+const box=(x,y,w,h,d,c,l)=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${c[0]}"/><polygon points="${x},${y} ${x+d},${y-d} ${x+w+d},${y-d} ${x+w},${y}" fill="${c[1]}"/><polygon points="${x+w},${y} ${x+w+d},${y-d} ${x+w+d},${y+h-d} ${x+w},${y+h}" fill="${c[2]}"/><text x="${x+w/2}" y="${y+h/2+5}" fill="#fff" font-size="14" font-weight="700" text-anchor="middle">${l}</text>`;
+const DEF='<defs><linearGradient id="gl" x1="0" x2="1"><stop offset="0" stop-color="#1c2f7a"/><stop offset=".5" stop-color="#3a5bd0"/><stop offset="1" stop-color="#16256a"/></linearGradient><linearGradient id="mg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c8d2e6"/><stop offset="1" stop-color="#6c7893"/></linearGradient></defs>';
+const BLUE=['#6d8bff','#a9bcff','#3f58c9'],VIO=['#8b5cff','#b79cff','#5b36c4'];
+/* 1-зертхана */
+function u1(){const F=S.m1*S.g,y=75+F/50*130,w=36+S.m1*7,h=30+S.m1*6,cy=250+h/2;let t=DEF+'<rect x="0" y="405" width="360" height="25" fill="#0c1544"/><rect x="40" y="20" width="14" height="385" fill="url(#gl)"/><rect x="40" y="20" width="150" height="12" fill="url(#gl)"/><line x1="180" y1="32" x2="180" y2="50" stroke="#9db3dd" stroke-width="3"/><rect x="150" y="50" width="60" height="175" rx="9" fill="url(#gl)" stroke="#38e1ff" stroke-width="2"/>';
+for(let i=0;i<=10;i++){const yy=75+i*13;t+=`<line x1="156" x2="${i%2?164:172}" y1="${yy}" y2="${yy}" stroke="#cfe0ff"/>`+(i%2?'':`<text x="178" y="${yy+4}" font-size="10" fill="#cfe0ff">${i*5}</text>`)}
+t+=`<line x1="150" x2="210" y1="${y}" y2="${y}" stroke="#ff6b8a" stroke-width="3"/><polygon points="214,${y} 228,${y-6} 228,${y+6}" fill="#ff6b8a"/><text x="180" y="240" font-size="11" fill="#9db3dd" text-anchor="middle">Н</text><line x1="180" y1="225" x2="180" y2="250" stroke="#9db3dd" stroke-width="3"/>`+box(180-w/2,250,w,h,10,BLUE,f(S.m1)+' кг')+arr(290,cy,290,cy+20+F*1.8,'#8b5cff')+`<text x="300" y="${cy+4}" font-size="13" fill="#cdbfff">Fау</text><text x="300" y="${cy+20}" font-size="13" fill="#cdbfff">${f(F)} Н</text>`;
+$('#s1').innerHTML=t;$('#v1m').textContent=f(S.m1);$('#r1').innerHTML=`Масса: <b>${f(S.m1)} кг</b> · g = ${f(S.g)} Н/кг<br>Fау = mg = ${f(S.m1)}·${f(S.g)} = <b>${f(F)} Н</b><br>Динамометр көрсеткіші: <b>${f(F)} Н</b>. Бағыты — тік төмен.`}
+/* 2-зертхана: серіппе анимациясы */
+const A2={x:.05,v:0,run:false};
+function d2(x){const y0=132,e=y0+x*300,Fg=S.m2*G,w=36+S.m2*10,h=26+S.m2*10,cy=e+10+h/2,L=10+Fg*2.5;let p='180,22 180,32';for(let i=0;i<14;i++)p+=` ${i%2?160:200},${32+(e-52)*(i+.5)/14}`;p+=` 180,${e-20} 180,${e}`;
+let t=DEF+'<rect x="90" y="10" width="180" height="12" rx="3" fill="url(#gl)"/>';
+t+=`<line x1="70" y1="${y0}" x2="70" y2="${y0+120}" stroke="#9db3dd"/>`;for(let i=0;i<=8;i++){const yy=y0+i*15;t+=`<line x1="${i%2?62:56}" x2="70" y1="${yy}" y2="${yy}" stroke="#9db3dd"/>`+(i%2?'':`<text x="18" y="${yy+4}" font-size="10" fill="#9db3dd">${f(i*.05)} м</text>`)}
+t+=`<line x1="70" y1="${y0}" x2="330" y2="${y0}" stroke="#38e1ff" stroke-dasharray="5 4"/><text x="235" y="${y0-5}" font-size="11" fill="#38e1ff">бастапқы ұзындық</text><line x1="70" y1="${e}" x2="165" y2="${e}" stroke="#ff6b8a" stroke-dasharray="3 3"/><polyline points="${p}" fill="none" stroke="#38e1ff" stroke-width="4" stroke-linejoin="round"/>`+box(180-w/2,e+10,w,h,10,VIO,f(S.m2)+' кг')+arr(272,cy,272,cy-L,'#38e1ff')+arr(305,cy,305,cy+L,'#b79cff')+`<text x="240" y="${cy-L-6}" font-size="12" fill="#38e1ff">Fсерп ↑</text><text x="296" y="${cy+L+16}" font-size="12" fill="#cdbfff">Fау ↓</text>`;$('#s2').innerHTML=t}
+function u2(){$('#v2k').textContent=S.k;$('#v2m').textContent=f(S.m2);const dl=S.m2*G/S.k;$('#r2').innerHTML=`Fау = mg = ${f(S.m2*G)} Н · Тепе-теңдікте kΔl = mg<br>Ұзару Δl = ${f(dl)} м (${f(dl*100)} см)<br>Fсерп = kΔl = ${S.k}·${f(dl)} = <b>${f(S.k*dl)} Н</b> · Динамометр: <b>${f(S.k*dl)} Н</b><br>Серпімділік күші деформацияға (төмен) қарама-қарсы — жоғары бағытталған.`;if(!A2.run){A2.run=true;k2()}}
+function k2(){const t=S.m2*G/S.k;A2.v+=(t-A2.x)*.12;A2.v*=.86;A2.x+=A2.v;d2(A2.x);if(Math.abs(t-A2.x)>2e-5||Math.abs(A2.v)>2e-5)requestAnimationFrame(k2);else{A2.x=t;d2(t);A2.run=false}}
+/* 3-зертхана */
+function tex(){let o;if(S.sf==='Ағаш'){o='<rect x="10" y="190" width="440" height="40" fill="#8a5a2b"/>';for(let i=0;i<8;i++)o+=`<path d="M10 ${197+i*4.5}Q120 ${193+i*4.5} 230 ${198+i*4.5}T450 ${197+i*4.5}" stroke="#5e3b17" fill="none"/>`}else if(S.sf==='Металл')o='<rect x="10" y="190" width="440" height="40" fill="url(#mg)"/><line x1="10" y1="196" x2="450" y2="196" stroke="#fff" stroke-opacity=".6"/>';else{o='<rect x="10" y="190" width="440" height="40" fill="#b08b5a"/>';for(let i=0;i<110;i++)o+=`<circle cx="${10+i*53%440}" cy="${193+i*37%34}" r="${1+i%3*.8}" fill="#5a4120"/>`}return o}
+function d3(){const mu=MU[S.sf],F=mu*S.N,x=S.bx,mvg=S.dir!==0;let t=DEF+tex()+box(x,134,84,56,12,VIO,'N = '+S.N+' Н');
+if(mvg){const r=S.dir>0,dx=r?x+96:x-70;t+=`<rect x="${dx}" y="152" width="66" height="18" rx="6" fill="url(#gl)" stroke="#38e1ff"/><text x="${dx+33}" y="165" font-size="12" fill="#fff" text-anchor="middle">${f(F)} Н</text><line x1="${r?x+84:x}" y1="161" x2="${r?dx:dx+66}" y2="161" stroke="#9db3dd" stroke-width="3"/>`+arr(r?x+30:x+54,110,r?x+30+30+F:x+54-30-F,110,'#38e1ff')+arr(r?x+54:x+30,214,r?x+54-20-F:x+30+20+F,214,'#ff6b8a')+`<text x="${x+42}" y="100" font-size="12" fill="#38e1ff" text-anchor="middle">Fтарту</text><text x="${x+42}" y="246" font-size="12" fill="#ffd3dc" text-anchor="middle">Fүйк (қозғалысқа қарсы)</text>`}
+$('#s3').innerHTML=t}
+function u3(){document.querySelectorAll('#sfb button').forEach(b=>b.classList.toggle('s',b.dataset.sf!==S.sf));$('#v3n').textContent=S.N;const mu=MU[S.sf],F=mu*S.N;$('#r3').innerHTML=`Бет: <b>${S.sf}</b> · μ = ${f(mu)} · N = ${S.N} Н<br>`+(S.dir?`Бірқалыпты қозғалыс: Fтарту = Fүйк = μN = ${f(mu)}·${S.N} = <b>${f(F)} Н</b> (динамометр: ${f(F)} Н)`:'Білеуше тыныштықта, динамометр 0 Н көрсетеді. Білеушені бірқалыпты сүйреп өлшеңіз.');d3()}
+let raf=0;function mv(d){S.dir=d;cancelAnimationFrame(raf);u3();if(d)raf=requestAnimationFrame(lp)}
+function lp(){if(!S.dir)return;S.bx+=S.dir*2;if(S.bx>300)S.bx=30;if(S.bx<30)S.bx=300;d3();raf=requestAnimationFrame(lp)}
+/* кесте */
+const HD={1:['m, кг','g, Н/кг','Fау, Н','Қорытынды'],2:['k, Н/м','m, кг','Δl, м','Fсерп, Н'],3:['Бет','μ','N, Н','Fүйк, Н']};
+function tb(n){const R=S.rows[n],I=(i,k,c='')=>`<input class="${c}" data-n="${n}" data-i="${i}" data-k="${k}" inputmode="decimal" value="${R[i][k]}" aria-label="${k}">`;
+let h='<tr><th>№</th>'+HD[n].map(x=>`<th>${x}</th>`).join('')+'<th></th></tr>';
+R.forEach((r,i)=>{const c=n==1?[f(r.m),f(r.g),I(i,'F'),I(i,'c','w')]:n==2?[r.k,f(r.m),I(i,'dl'),I(i,'F')]:[r.sf,f(r.mu),r.N,I(i,'F')];h+=`<tr><td>${i+1}</td>${c.map(x=>`<td>${x}</td>`).join('')}<td><button class="x" onclick="del(${n},${i})" aria-label="Жолды өшіру">✕</button></td></tr>`});
+if(!R.length)h+='<tr><td colspan="6" style="color:#9db3dd">Кесте бос. Параметрді орнатып, «Кестеге жазу» батырмасын басыңыз.</td></tr>';$('#t'+n).innerHTML=h}
+function add(n){const R=S.rows[n];if(n==1)R.push({m:S.m1,g:S.g,F:'',c:''});else if(n==2)R.push({k:S.k,m:S.m2,dl:'',F:''});else{if(!S.dir){$('#fb3').innerHTML='<ul><li>Алдымен білеушені «Оңға сүйреу» немесе «Солға сүйреу» арқылы бірқалыпты қозғалтыңыз, сонда динамометр көрсеткіші пайда болады.</li></ul>';return}R.push({sf:S.sf,mu:MU[S.sf],N:S.N,F:''})}tb(n)}
+function del(n,i){S.rows[n].splice(i,1);tb(n)}
+function clr(n){S.rows[n]=[];tb(n);$('#fb'+n).innerHTML=''}
+function rst(n){if(n==1){S.m1=D.m1;S.g=D.g;$('#m1').value=D.m1;document.querySelector('input[name=g][value="9.8"]').checked=true;u1()}if(n==2){S.k=D.k;S.m2=D.m2;$('#k2').value=D.k;$('#m2').value=D.m2;u2()}if(n==3){S.sf=D.sf;S.N=D.N;S.bx=D.bx;$('#n3').value=D.N;mv(0)}}
+/* тексеру */
+const ok=(a,b,e=.01)=>!isNaN(a)&&Math.abs(a-b)<=.02*Math.abs(b)+e;
+const V={
+1:r=>{const F=num(r.F);return isNaN(F)?'күш мәні енгізілмеген':ok(F,r.m*r.g)?'':`Fау = mg формуласын қолданыңыз (m = ${f(r.m)} кг, g = ${f(r.g)} Н/кг)`},
+2:r=>{const d=num(r.dl),F=num(r.F);if(isNaN(d)||isNaN(F))return 'Δl немесе F мәні енгізілмеген';if(!ok(d,r.m*G/r.k,.0005))return `жүк тыныштықта тұр, сондықтан kΔl = mg теңдеуінен Δl табыңыз (k = ${r.k} Н/м, m = ${f(r.m)} кг)`;return ok(F,r.m*G)?'':'F = kΔl формуласымен күшті есептеңіз'},
+3:r=>{const F=num(r.F);return isNaN(F)?'күш мәні енгізілмеген':ok(F,r.mu*r.N)?'':`F = μN формуласын қолданыңыз (μ = ${f(r.mu)}, N = ${r.N} Н)`}};
+const EX={
+1:R=>{const x=[.5,1,2,3].filter(v=>!R.some(r=>Math.abs(r.m-v)<1e-6));if(x.length)return `кестеде m = ${x.map(f).join('; ')} кг өлшемдері жоқ`},
+2:R=>{if(new Set(R.filter(r=>r.k==100).map(r=>r.m)).size<3)return 'k = 100 Н/м кезінде кемінде 3 түрлі масса өлшеңіз';if(!R.some(r=>r.k!=100))return 'қатаңдықты өзгертіп, тағы бір өлшем алыңыз'},
+3:R=>{const x=Object.keys(MU).filter(s=>!R.some(r=>r.sf==s));if(x.length)return 'әлі өлшенбеген беттер: '+x.join(', ');if(!R.some(r=>R.some(q=>q.sf==r.sf&&q.N!=r.N)))return 'бір бетте N-нің кемінде екі мәнін өлшеңіз'}};
+function chk(n){const R=S.rows[n],m=[];let a=0,b=0,c=0;
+const e=EX[n](R);if(e)m.push('Тәжірибе: '+e+'.');else a=1;
+const bad=[];R.forEach((r,i)=>{const s=V[n](r);if(s)bad.push(`Кесте, №${i+1} жол: ${s}.`)});
+if(R.length<3)m.push('Кесте: кемінде 3 өлшем енгізіңіз.');else if(bad.length)m.push(...bad);else b=1;
+let cc=0;Q[n].forEach((q,i)=>{const v=S.sel[n+'_'+i];if(v===undefined||v==='')m.push('Қорытынды: «'+q.t+'» сұрағына жауап таңдаңыз.');else if(+v!==q.c)m.push('Қорытынды: ақпарат — '+q.h);else cc++});if(cc===Q[n].length)c=1;
+const s=a+b+c;S.score[n]=s;$('#b'+n).textContent=' '+s+'/3';
+const mk=(v,t)=>`<li class="${v?'g':''}" style="color:${v?'#34e0a1':'#ffd3dc'}">${v?'✓':'✗'} ${t}</li>`;
+$('#fb'+n).innerHTML=`<div class="sc3">${s} / 3 балл</div><ul style="padding-left:0;list-style:none">${mk(a,'Тәжірибе орындалды')}${mk(b,'Кесте дұрыс толтырылды')}${mk(c,'Қорытынды дұрыс жасалды')}</ul>`+(m.length?`<ul>${m.map(x=>`<li>${x}</li>`).join('')}</ul>`:'<p class="g" style="color:#34e0a1">Керемет! Зертхана толық орындалды.</p>')}
+function sum(){let t=0,h='<ul style="padding-left:0;list-style:none">';[1,2,3].forEach(n=>{const s=S.score[n];if(s!==undefined)t+=s;h+=`<li>${n}-зертхана: ${s===undefined?'әлі тексерілмеген':s+' / 3'}</li>`});$('#fsum').innerHTML=`<div class="sc3">Жалпы: ${t} / 9 балл</div>${h}</ul><div class="bd"><div style="width:${t/9*100}%"></div></div>`}
+function save(){let t='МЕХАНИКАДАҒЫ КҮШТЕР — виртуалды зертхана\nАты-жөні: '+($('#nm').value||'—')+'\n\n';
+[1,2,3].forEach(n=>{t+=`== ${TI[n]} (${S.score[n]===undefined?'тексерілмеген':S.score[n]+'/3'}) ==\n${HD[n].join(' | ')}\n`;S.rows[n].forEach(r=>t+=Object.values(r).join(' | ')+'\n');Q[n].forEach((q,i)=>{const v=S.sel[n+'_'+i];t+=q.t+' → '+(v===undefined||v===''?'—':q.o[v])+'\n'});t+='\n'});
+t+='== Қорытынды сұрақтар ==\n';document.querySelectorAll('[data-a]').forEach((a,i)=>t+=(i+1)+'. '+(a.value||'—')+'\n');
+const l=document.createElement('a');l.href=URL.createObjectURL(new Blob([t],{type:'text/plain;charset=utf-8'}));l.download='kushter_qorytyndy.txt';l.click()}
+/* оқиғалар */
+document.addEventListener('input',e=>{const t=e.target;if(t.dataset.k)S.rows[t.dataset.n][t.dataset.i][t.dataset.k]=t.value});
+document.addEventListener('change',e=>{const t=e.target;if(t.dataset.s)S.sel[t.dataset.s]=t.value});
+document.querySelectorAll('.sc').forEach(c=>{c.onpointermove=e=>{const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;c.style.transform=`rotateY(${x*14}deg) rotateX(${-y*14}deg)`};c.onpointerleave=()=>c.style.transform=''});
+A2.x=S.m2*G/S.k;u1();u2();u3();[1,2,3].forEach(tb);go('home');
+</script>
+</body>
+</html>
